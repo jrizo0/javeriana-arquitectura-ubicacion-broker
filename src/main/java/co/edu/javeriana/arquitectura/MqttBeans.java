@@ -44,7 +44,7 @@ public class MqttBeans {
 	@Bean
 	public MessageProducer inbound() {
 		MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter("serverIn",
-				mqttClientFactory(), "hola");
+				mqttClientFactory(), "data/localizationChanges");
 
 		adapter.setCompletionTimeout(5000);
 		adapter.setConverter(new DefaultPahoMessageConverter());
@@ -61,10 +61,12 @@ public class MqttBeans {
 			@Override
 			public void handleMessage(Message<?> message) throws MessagingException {
 				String topic = message.getHeaders().get(MqttHeaders.RECEIVED_TOPIC).toString();
-				if (topic.equals("myTopic")) {
-					System.out.println("This is the topic");
+				if (topic.equals("data/localizationChanges")) {
+					System.out.println("Se recibio un cambio en las localizaciones de los usuarios:");
+					System.out.println(message.getPayload());
+				} else {
+					System.out.println("Dummy2 recibio un msg de otro topico");
 				}
-				System.out.println(message.getPayload());
 			}
 
 		};
@@ -81,7 +83,7 @@ public class MqttBeans {
 		// clientId is generated using a random number
 		MqttPahoMessageHandler messageHandler = new MqttPahoMessageHandler("serverOut", mqttClientFactory());
 		messageHandler.setAsync(true);
-		messageHandler.setDefaultTopic("myTopic");
+		messageHandler.setDefaultTopic("data/#");
 		messageHandler.setDefaultRetained(false);
 		return messageHandler;
 	}
