@@ -58,18 +58,13 @@ public class MqttBeans {
 	@ServiceActivator(inputChannel = "mqttInputChannel")
 	public MessageHandler handler() {
 		return new MessageHandler() {
-
 			@Override
 			public void handleMessage(Message<?> message) throws MessagingException {
-				String topic = message.getHeaders().get(MqttHeaders.RECEIVED_TOPIC).toString();
-				if (topic.equals(topicLocation)) {
-					System.out.println("Se recibio un cambio en las localizaciones de los usuarios:");
-					System.out.println(message.getPayload());
-				} else {
-					System.out.println("Dummy2 recibio un msg de otro topico");
-				}
+				// String topic =
+				// message.getHeaders().get(MqttHeaders.RECEIVED_TOPIC).toString();
+				System.out.println("Se recibio un cambio en las localizaciones de los usuarios:");
+				System.out.println(message.getPayload());
 			}
-
 		};
 	}
 
