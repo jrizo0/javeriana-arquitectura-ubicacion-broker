@@ -22,7 +22,7 @@ public class MqttController {
 		try {
 			JsonObject convertObject = new Gson().fromJson(mqttMessage, JsonObject.class);
 			// mqtGateway.senToMqtt(convertObject.get("message").toString(),
-			mqtGateway.sendToMqtt(convertObject.get("message").toString(), convertObject.get("topic").getAsString());
+			mqtGateway.sendToMqtt(convertObject.get("data").toString(), convertObject.get("topic").getAsString());
 			return ResponseEntity.ok("Success");
 		} catch (Exception ex) {
 			ex.printStackTrace();

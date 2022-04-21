@@ -25,7 +25,7 @@ public class MqttBeans {
 		DefaultMqttPahoClientFactory factory = new DefaultMqttPahoClientFactory();
 		MqttConnectOptions options = new MqttConnectOptions();
 
-		options.setServerURIs(new String[] { "tcp://localhost:1883" });
+		options.setServerURIs(new String[] { "tcp://10.43.102.29:1883" });
 		options.setUserName("admin");
 		String pass = "1234";
 		options.setPassword(pass.toCharArray());
@@ -44,7 +44,7 @@ public class MqttBeans {
 	@Bean
 	public MessageProducer inbound() {
 		MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter("serverIn",
-				mqttClientFactory(), "data/localizationChanges");
+				mqttClientFactory(), "data/locationChanges");
 
 		adapter.setCompletionTimeout(5000);
 		adapter.setConverter(new DefaultPahoMessageConverter());
