@@ -19,6 +19,7 @@ import org.springframework.messaging.MessagingException;
 
 @Configuration
 public class MqttBeans {
+	private String topicLocation = "datat/locationChanges";
 
 	@Bean
 	public MqttPahoClientFactory mqttClientFactory() {
@@ -44,7 +45,7 @@ public class MqttBeans {
 	@Bean
 	public MessageProducer inbound() {
 		MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter("serverIn",
-				mqttClientFactory(), "data/locationChanges");
+				mqttClientFactory(), topicLocation);
 
 		adapter.setCompletionTimeout(5000);
 		adapter.setConverter(new DefaultPahoMessageConverter());
@@ -61,7 +62,7 @@ public class MqttBeans {
 			@Override
 			public void handleMessage(Message<?> message) throws MessagingException {
 				String topic = message.getHeaders().get(MqttHeaders.RECEIVED_TOPIC).toString();
-				if (topic.equals("data/localizationChanges")) {
+				if (topic.equals(topicLocation)) {
 					System.out.println("Se recibio un cambio en las localizaciones de los usuarios:");
 					System.out.println(message.getPayload());
 				} else {
