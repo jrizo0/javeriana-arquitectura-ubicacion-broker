@@ -19,7 +19,7 @@ import org.springframework.messaging.MessagingException;
 
 @Configuration
 public class MqttBeans {
-	private String topicLocation = "datat/locationChanges";
+	private String topicLocation = "data/locationChanges";
 
 	@Bean
 	public MqttPahoClientFactory mqttClientFactory() {
