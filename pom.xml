@@ -10,10 +10,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>co.edu.javeriana.arquitectura</groupId>
-	<artifactId>Dummy2</artifactId>
+	<artifactId>AppUbicacion</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Dummy2</name>
-	<description>dummy2</description>
+	<name>AppUbicacion</name>
+	<description>AppUbicacion</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
